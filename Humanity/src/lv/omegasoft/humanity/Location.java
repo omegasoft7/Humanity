@@ -1,3 +1,5 @@
+package lv.omegasoft.humanity;
+
 
 //It is an object that contains location of other objects
 public class Location {

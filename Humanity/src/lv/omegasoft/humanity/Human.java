@@ -1,3 +1,5 @@
+package lv.omegasoft.humanity;
+
 import java.util.Date;
 
 //It is an object that contains a Human details
@@ -5,11 +7,23 @@ public class Human {
 
 	//Variables --------------------------------------------------------------------------------------------------
 	
-	
+	//if dateOfBirth is null means not exist yet
 	Date dateOfBirth;
+	
+	//If dateOfDie is not null means died
 	Date dateOfDie;
 	
+	
+	
+	//it is a number between 0 - 10000
+	long Health;
+	
+	//it is a number between 0 - 10000
 	long Happiness;
+	
+	//it is a number between 0 - 10000
+	long Wise;
+	
 	
 	Location location;
 	
@@ -31,9 +45,17 @@ public class Human {
 		location = mother.getLocation();
 		
 		
+		
+		//Set Health number
+		Health = MakeHealth(father, mother);
+		
+		
 		//Set Happiness number
 		Happiness = MakeHappiness(father, mother);
 		
+		//Set Wise number
+		Wise = MakeWise(father, mother);
+				
 		
 		//Set sex number
 		sex = MakeSex(father, mother);
@@ -48,12 +70,25 @@ public class Human {
 	
 	
 	
+	//Make Health of child
+	private long MakeHealth(Human father, Human mother){
+		//TODO make Health
+		return 100;
+	}
+	
 	//Make Happiness of child
 	private long MakeHappiness(Human father, Human mother){
 		//TODO make Happiness
-		return 0;
+		return 100;
 	}
 	
+	
+	//Make Wise of child
+	private long MakeWise(Human father, Human mother){
+		//TODO make Wise
+		return 100;
+	}
+
 	//Make sex of child
 	private long MakeSex(Human father, Human mother){
 		//TODO make sex
