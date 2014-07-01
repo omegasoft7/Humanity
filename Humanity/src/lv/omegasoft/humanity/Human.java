@@ -32,6 +32,10 @@ public class Human {
 	long sex;
 	
 	
+	//Gene of human
+	Gene gene;
+	
+	
 	//Variables --------------------------------------------------------------------------------------------------
 	
 	//Make a new Human by getting his mother
@@ -40,6 +44,8 @@ public class Human {
 		//Make date of birth to Today
 		dateOfBirth = new Date();
 		
+		//Make child GENE 
+		gene = makeGene(father.getGene(), mother.getGene());
 		
 		//set location to mother location
 		location = mother.getLocation();
@@ -47,21 +53,33 @@ public class Human {
 		
 		
 		//Set Health number
-		Health = MakeHealth(father, mother);
+		Health = MakeHealth(gene);
 		
 		
 		//Set Happiness number
-		Happiness = MakeHappiness(father, mother);
+		Happiness = MakeHappiness(gene);
 		
 		//Set Wise number
-		Wise = MakeWise(father, mother);
+		Wise = MakeWise(gene);
 				
 		
 		//Set sex number
-		sex = MakeSex(father, mother);
+		sex = MakeSex(gene);
+		
+		
 	}
 
 
+	//Moving this human
+	//If a direction don't want to change just leave it 0
+	//Just difference of directions by positive or negative numbers
+	public Location Move(long x, long y, long z) {
+		location.setX(location.getX() + x);
+		location.setY(location.getY() + y);
+		location.setZ(location.getZ() + z);
+		
+		return location;
+	}
 	
 	//Get location of this human
 	public Location getLocation() {
@@ -69,29 +87,44 @@ public class Human {
 	}
 	
 	
+	//make new Child GENE
+	private Gene makeGene(Gene father, Gene mother){
+		//TODO make GENE
+		return null;
+	}
 	
 	//Make Health of child
-	private long MakeHealth(Human father, Human mother){
+	private long MakeHealth(Gene gene){
 		//TODO make Health
 		return 100;
 	}
 	
 	//Make Happiness of child
-	private long MakeHappiness(Human father, Human mother){
+	private long MakeHappiness(Gene gene){
 		//TODO make Happiness
 		return 100;
 	}
 	
 	
 	//Make Wise of child
-	private long MakeWise(Human father, Human mother){
+	private long MakeWise(Gene gene){
 		//TODO make Wise
 		return 100;
 	}
 
 	//Make sex of child
-	private long MakeSex(Human father, Human mother){
+	private long MakeSex(Gene gene){
 		//TODO make sex
 		return 0;
+	}
+	
+	public Gene getGene() {
+		return gene;
+	}
+
+
+
+	public void setGene(Gene gene) {
+		this.gene = gene;
 	}
 }
