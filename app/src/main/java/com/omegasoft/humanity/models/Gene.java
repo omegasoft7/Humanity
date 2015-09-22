@@ -1,4 +1,4 @@
-package humanity.omegasoft.com.humanity.humanity;
+package com.omegasoft.humanity.models;
 
 //Gene for human 
 public class Gene {
