@@ -47,10 +47,12 @@ public abstract class AliveObject extends ObjectInWorld {
         this.location = mother == null ? new Location() : mother.getLocation();
 
         this.maxMovementSpeed = maxSpeed;
+        getChangeSubject().onNext(this);
     }
 
     public void Kill(Date dateOfDie) {
         this.dateOfDie = dateOfDie;
+        getChangeSubject().onNext(this);
     }
 
     public boolean isAlive() {
@@ -70,6 +72,7 @@ public abstract class AliveObject extends ObjectInWorld {
                 .delay(100, TimeUnit.MILLISECONDS)
                 .repeatWhen(o -> o.takeWhile((v -> {
                     getLocation().move(destination, requestedSpeed);
+                    getChangeSubject().onNext(this);
                     return !getLocation().equals(destination);
                 })));
     }
