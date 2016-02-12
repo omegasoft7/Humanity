@@ -58,6 +58,7 @@ public abstract class AliveObject extends ObjectInWorld {
     }
 
     public Observable<Location> moveTo(Location destination, float speedRate) {
+        //todo check world x, Y limitations
         if (speedRate > 1 || speedRate < 0)
             throw new IllegalArgumentException("speedRate should be a value between 0-1");
 
