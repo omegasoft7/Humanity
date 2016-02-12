@@ -2,6 +2,7 @@ package com.omegasoft.humanity.models;
 
 
 import lombok.Getter;
+import lombok.Setter;
 
 //It is an object that contains location of other objects
 public class Location {
@@ -9,13 +10,13 @@ public class Location {
 	
 	//Variables --------------------------------------------------------------------------------------------------
 
-    @Getter
+    @Getter @Setter
 	private float X = 0;
 
-    @Getter
+    @Getter @Setter
     private float Y = 0;
 
-    @Getter
+    @Getter @Setter
     private float Z = 0;
 
 	//Variables --------------------------------------------------------------------------------------------------

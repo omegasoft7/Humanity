@@ -29,7 +29,8 @@ public abstract class World {
     @Getter
     private float finishZ = 0;
 
-    private ArrayList<ObjectInWorld> objecstInWorld = new ArrayList<>();
+    @Getter
+    private ArrayList<AliveObject> objecstInWorld = new ArrayList<>();
 
     private BehaviorSubject<World> changeSubject = BehaviorSubject.create();
 
@@ -52,19 +53,19 @@ public abstract class World {
         this(0, 0, 0, finishx, finishy, 0);
     }
 
-    public boolean attachObjectToWorld(ObjectInWorld objectInWorld) {
-        if (objecstInWorld.contains(objectInWorld)) return false;
+    public boolean attachObjectToWorld(AliveObject aliveObject) {
+        if (objecstInWorld.contains(aliveObject)) return false;
 
-        if (objecstInWorld.add(objectInWorld)) {
-            objectInWorld.attachToWorld(this);
+        if (objecstInWorld.add(aliveObject)) {
+            aliveObject.attachToWorld(this);
             changeSubject.onNext(this);
         }
 
         return false;
     }
 
-    public boolean deatachObjectFromWorld(ObjectInWorld objectInWorld) {
-        if (objecstInWorld.remove(objectInWorld)) {
+    public boolean deatachObjectFromWorld(AliveObject aliveObject) {
+        if (objecstInWorld.remove(aliveObject)) {
             changeSubject.onNext(this);
             return true;
         }

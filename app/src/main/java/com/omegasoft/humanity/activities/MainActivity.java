@@ -12,6 +12,7 @@ import com.omegasoft.humanity.views.WorldView;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import fslogger.lizsoft.lv.fslogger.FSLogger;
 
 public class MainActivity extends Activity {
 
@@ -26,16 +27,33 @@ public class MainActivity extends Activity {
         ButterKnife.bind(this);
     }
 
-    @OnClick(R.id.btnTest)
-    void onTestButtonClick() {
+    @Override
+    protected void onResume() {
+        super.onResume();
 
+        firstImplementation();
+    }
+
+    private void firstImplementation() {
         Earth earth = new Earth();
 
-        Human human1 = new Human(null, null, "Adam");
+        human1 = new Human(null, null, "Adam");
         earth.attachObjectToWorld(human1);
 
-        human1.moveTo(new Location(10, 20, 30), 1.0f);
-
         world.init(earth);
+    }
+
+    Human human1;
+
+    @OnClick(R.id.btnTest)
+    void onTestButtonClick() {
+        FSLogger.w(1, "btnTest1 clicked.");
+
+    }
+
+    @OnClick(R.id.btnTest2)
+    void onTest2ButtonClick() {
+        FSLogger.w(1, "btnTest2 clicked.");
+        human1.moveTo(new Location(150, 180, 0), 1.0f).subscribe();
     }
 }

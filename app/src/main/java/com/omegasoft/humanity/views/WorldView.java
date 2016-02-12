@@ -1,9 +1,12 @@
 package com.omegasoft.humanity.views;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.util.AttributeSet;
 import android.widget.FrameLayout;
 
+import com.omegasoft.humanity.humanity.HumanityAPP;
+import com.omegasoft.humanity.interfaces.AliveObject;
 import com.omegasoft.humanity.interfaces.World;
 
 import java.util.concurrent.TimeUnit;
@@ -29,8 +32,8 @@ public class WorldView extends FrameLayout {
     }
 
     public void init(World world) {
-        getLayoutParams().width = (int) (world.getFinishX() - world.getStartX());
-        getLayoutParams().height = (int) (world.getFinishY() - world.getStartY());
+        getLayoutParams().width = (int) (world.getFinishX() - world.getStartX()) * HumanityAPP.zoom;
+        getLayoutParams().height = (int) (world.getFinishY() - world.getStartY()) * HumanityAPP.zoom;
         requestLayout();
 
         world.change()
@@ -42,5 +45,15 @@ public class WorldView extends FrameLayout {
 
     private void redrawWorld(World world) {
         FSLogger.w(1, "redrawWorld called.");
+        //Remove whole previous views
+        removeAllViews();
+
+        //Draw new views
+        for (AliveObject aliveObject : world.getObjecstInWorld()) {
+            AliveObjectView aliveObjectView = new AliveObjectView(getContext());
+            aliveObjectView.init(aliveObject, Color.RED);
+
+            addView(aliveObjectView);
+        }
     }
 }

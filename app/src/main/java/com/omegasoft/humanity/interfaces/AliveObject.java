@@ -10,11 +10,12 @@ import lombok.Getter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
+import rx.subjects.BehaviorSubject;
 
 /**
  * Created by farhad on 16.12.2.
  */
-public abstract class AliveObject extends ObjectInWorld {
+public abstract class AliveObject {
 
     @Getter
     private final float maxMovementSpeed;
@@ -37,6 +38,12 @@ public abstract class AliveObject extends ObjectInWorld {
     @Getter
     private Gene gene;
 
+    @Getter
+    private BehaviorSubject<AliveObject> changeSubject = BehaviorSubject.create();
+
+    @Getter
+    private World world;
+
     public AliveObject(AliveObject father, AliveObject mother, String name, float maxSpeed) {
         this.name = name;
 
@@ -50,6 +57,14 @@ public abstract class AliveObject extends ObjectInWorld {
         getChangeSubject().onNext(this);
     }
 
+    public void attachToWorld(World world) {
+        this.world = world;
+    }
+
+    public boolean deatach() {
+        return this.world.deatachObjectFromWorld(this);
+    }
+
     public void Kill(Date dateOfDie) {
         this.dateOfDie = dateOfDie;
         getChangeSubject().onNext(this);
@@ -60,9 +75,13 @@ public abstract class AliveObject extends ObjectInWorld {
     }
 
     public Observable<Location> moveTo(Location destination, float speedRate) {
-        //todo check world x, Y limitations
         if (speedRate > 1 || speedRate < 0)
             throw new IllegalArgumentException("speedRate should be a value between 0-1");
+
+        //Make sure that destination location is not bigger that world limitations
+        destination.setX(Math.min(destination.getX(), (getWorld().getFinishX() - getWorld().getStartX())));
+        destination.setY(Math.min(destination.getY(), (getWorld().getFinishY() - getWorld().getStartY())));
+        destination.setZ(Math.min(destination.getZ(), (getWorld().getFinishZ() - getWorld().getStartZ())));
 
         float requestedSpeed = getMaxMovementSpeed() * speedRate;
 
@@ -75,5 +94,9 @@ public abstract class AliveObject extends ObjectInWorld {
                     getChangeSubject().onNext(this);
                     return !getLocation().equals(destination);
                 })));
+    }
+
+    public Observable<AliveObject> change() {
+        return changeSubject.asObservable();
     }
 }
