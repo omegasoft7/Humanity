@@ -1,71 +1,92 @@
 package com.omegasoft.humanity.models;
 
 
+import lombok.Getter;
+
 //It is an object that contains location of other objects
 public class Location {
 
 	
 	//Variables --------------------------------------------------------------------------------------------------
-	
-	long X;
-	long Y;
-	long Z;
-	
-	
+
+    @Getter
+	private float X = 0;
+
+    @Getter
+    private float Y = 0;
+
+    @Getter
+    private float Z = 0;
+
 	//Variables --------------------------------------------------------------------------------------------------
-	
-	
-	
+
+    public Location() {
+
+    }
+
 	//Make a location by another human location
 	public Location(Human human) {
-		setX(human.getLocation().getX());
-		setY(human.getLocation().getY());
-		setZ(human.getLocation().getZ());
+		this.X = human.getLocation().getX();
+        this.Y = human.getLocation().getY();
+        this.Z = human.getLocation().getZ();
 	}
 	
 	
 	//make new location the same with received location
 	public Location(Location location) {
-		setX(location.getX());
-		setY(location.getY());
-		setZ(location.getZ());
+        this.X = location.getX();
+        this.Y = location.getY();
+        this.Z = location.getZ();
 	}
-	
 	
 	//Make new location with points
-	public Location(long x, long y, long z) {
-		setX(x);
-		setY(y);
-		setZ(z);
+	public Location(float x, float y, float z) {
+        this.X = x;
+        this.Y = y;
+        this.Z = z;
 	}
 
+    //Make new location with 2D points
+    public Location(float x, float y) {
+        this(x, y, 0);
+    }
 
-	public long getX() {
-		return X;
-	}
+    public void move(Location destination, float steps) {
 
+        //Move X
+        if (getX() > destination.getX()) {
+            this.X -= Math.min((getX() - destination.getX()), steps);
+        } else if (getX() < destination.getX()) {
+            this.X += Math.min((destination.getX() - getX()), steps);
+        }
 
-	public void setX(long x) {
-		X = x;
-	}
+        //Move Y
+        if (getY() > destination.getY()) {
+            this.Y -= Math.min((getY() - destination.getY()), steps);
+        } else if (getY() < destination.getY()) {
+            this.Y += Math.min((destination.getY() - getY()), steps);
+        }
 
+        //Move Z
+        if (getZ() > destination.getZ()) {
+            this.Z -= Math.min((getZ() - destination.getZ()), steps);
+        } else if (getZ() < destination.getZ()) {
+            this.Z += Math.min((destination.getZ() - getZ()), steps);
+        }
+    }
 
-	public long getY() {
-		return Y;
-	}
+    @Override
+    public boolean equals(Object loc) {
+        if (!(loc instanceof Location)) return false;
 
+        Location _loc = (Location) loc;
+        if (_loc == null) return false;
 
-	public void setY(long y) {
-		Y = y;
-	}
+        return _loc.getX() == getX() && _loc.getY() == getY() && _loc.getZ() == getZ();
+    }
 
-
-	public long getZ() {
-		return Z;
-	}
-
-
-	public void setZ(long z) {
-		Z = z;
-	}
+    @Override
+    public String toString() {
+        return "X:" + getX() + " Y:" + getY() + " Z:" + getZ();
+    }
 }
