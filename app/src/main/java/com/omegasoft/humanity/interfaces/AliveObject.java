@@ -7,7 +7,6 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import lombok.Getter;
-import lombok.Setter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -15,13 +14,12 @@ import rx.schedulers.Schedulers;
 /**
  * Created by farhad on 16.12.2.
  */
-public abstract class AliveObject {
+public abstract class AliveObject extends ObjectInWorld {
 
     @Getter
     private final float maxMovementSpeed;
     //Name of Human
     @Getter
-    @Setter
     private String name;
 
     //if dateOfBirth is null means not exist yet
@@ -40,7 +38,8 @@ public abstract class AliveObject {
     private Gene gene;
 
     public AliveObject(AliveObject father, AliveObject mother, String name, float maxSpeed) {
-        setName(name);
+        this.name = name;
+
         this.dateOfBirth = new Date();
 
         this.gene = Gene.makeGene(father, mother);
