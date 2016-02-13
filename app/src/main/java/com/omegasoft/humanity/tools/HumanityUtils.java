@@ -26,6 +26,7 @@ public class HumanityUtils {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Enter a value:");
         builder.setView(R.layout.dialog_customview);
+        builder.setCancelable(false);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
