@@ -97,6 +97,10 @@ public abstract class AliveObject {
                 })));
     }
 
+    public void notifyChange() {
+        getChangeSubject().onNext(this);
+    }
+
     public Observable<AliveObject> change() {
         return changeSubject.asObservable();
     }
