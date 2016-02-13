@@ -32,7 +32,7 @@ public class HumanityUtils {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                aliveObject.moveTo(locationSetView.getLocation(), locationSetView.getSpeed());
+                aliveObject.moveTo(locationSetView.getLocation(), locationSetView.getSpeed()).subscribe();
 
                 behaviorSubject.onNext(aliveObject);
 
