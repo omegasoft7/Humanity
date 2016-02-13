@@ -7,6 +7,7 @@ import com.omegasoft.humanity.R;
 import com.omegasoft.humanity.models.Earth;
 import com.omegasoft.humanity.models.Human;
 import com.omegasoft.humanity.models.Location;
+import com.omegasoft.humanity.tools.HumanityUtils;
 import com.omegasoft.humanity.views.WorldView;
 
 import butterknife.Bind;
@@ -49,6 +50,7 @@ public class MainActivity extends Activity {
     void onTestButtonClick() {
         FSLogger.w(1, "btnTest1 clicked.");
 
+        HumanityUtils.showDialogWithView(this, human1);
     }
 
     @OnClick(R.id.btnTest2)
