@@ -4,8 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.omegasoft.humanity.R;
 import com.omegasoft.humanity.interfaces.AliveObject;
+import com.omegasoft.humanity.views.LocationSetView;
 
 import rx.Observable;
 import rx.subjects.BehaviorSubject;
@@ -23,15 +23,16 @@ public class HumanityUtils {
             return behaviorSubject.asObservable();
         }
 
+        LocationSetView locationSetView = new LocationSetView(context);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Enter a value:");
-        builder.setView(R.layout.dialog_customview);
+        builder.setView(locationSetView);
         builder.setCancelable(false);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                //todo set received values from view to aliveobject
-                aliveObject.notifyChange();
+                aliveObject.moveTo(locationSetView.getLocation(), locationSetView.getSpeed());
 
                 behaviorSubject.onNext(aliveObject);
 

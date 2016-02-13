@@ -5,13 +5,21 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:text="X:"
             android:textSize="17sp" />
 
@@ -19,8 +27,7 @@
             android:id="@+id/locationSetX"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|right"
-            android:hint="X"
+            android:gravity="center_vertical|end"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
@@ -33,7 +40,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:text="Y:"
             android:textSize="17sp" />
 
@@ -41,21 +48,20 @@
             android:id="@+id/locationSetY"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|right"
-            android:hint="Y"
+            android:gravity="center_vertical|end"
             android:inputType="numberDecimal" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="5dp"
+            android:layout_marginEnd="5dp"
             android:text="Z:"
             android:textSize="17sp" />
 
@@ -63,9 +69,33 @@
             android:id="@+id/locationSetZ"
             android:layout_width="50dp"
             android:layout_height="wrap_content"
-            android:gravity="center_vertical|right"
-            android:hint="Z"
+            android:gravity="center_vertical|end"
             android:inputType="numberDecimal" />
+    </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="Speed:"
+                android:textSize="17sp" />
+
+            <EditText
+                android:id="@+id/locationSetSpeed"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical|end"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>
