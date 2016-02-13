@@ -1,5 +1,6 @@
 package com.omegasoft.humanity.interfaces;
 
+import com.omegasoft.humanity.humanity.HumanityAPP;
 import com.omegasoft.humanity.models.Gene;
 import com.omegasoft.humanity.models.Location;
 
@@ -88,7 +89,7 @@ public abstract class AliveObject {
         return Observable.just(getLocation())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .delay(100, TimeUnit.MILLISECONDS)
+                .delay(HumanityAPP.delayForEachFrame, TimeUnit.MILLISECONDS)
                 .repeatWhen(o -> o.takeWhile((v -> {
                     getLocation().move(destination, requestedSpeed);
                     getChangeSubject().onNext(this);

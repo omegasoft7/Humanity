@@ -12,6 +12,7 @@ import fslogger.lizsoft.lv.fslogger.FSLogger;
 public class HumanityAPP extends Application {
 
     public static final int zoom = 4;
+    public static final int delayForEachFrame = 50;
 
     @Override
     public void onCreate() {
