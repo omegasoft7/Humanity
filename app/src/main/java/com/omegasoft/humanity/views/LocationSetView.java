@@ -56,14 +56,14 @@ public class LocationSetView extends RelativeLayout {
 
     public Location getLocation() {
         Location _loc = new Location();
-        _loc.setX(Float.valueOf(String.valueOf(locationSetX.getText())));
-        _loc.setY(Float.valueOf(String.valueOf(locationSetY.getText())));
-        _loc.setZ(Float.valueOf(String.valueOf(locationSetZ.getText())));
+        _loc.setX(Float.valueOf(String.valueOf(locationSetX.getText().length() == 0 ? 0 : locationSetX.getText())));
+        _loc.setY(Float.valueOf(String.valueOf(locationSetY.getText().length() == 0 ? 0 : locationSetY.getText())));
+        _loc.setZ(Float.valueOf(String.valueOf(locationSetZ.getText().length() == 0 ? 0 : locationSetZ.getText())));
 
         return _loc;
     }
 
     public float getSpeed() {
-        return Float.valueOf(String.valueOf(locationSetSpeed.getText()));
+        return Float.valueOf(String.valueOf(locationSetSpeed.getText().length() == 0 ? 0 : locationSetSpeed.getText()));
     }
 }
