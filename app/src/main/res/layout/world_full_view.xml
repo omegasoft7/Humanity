@@ -7,16 +7,15 @@
         android:id="@+id/worldFullActionButton"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:layout_alignParentEnd="true"
-        android:text="Act" />
-
+        android:text="Act"
+        android:layout_alignParentEnd="true"/>
     <Spinner
         android:id="@+id/worldFullSpinner"
         android:layout_width="match_parent"
         android:layout_height="60dp"
+        android:spinnerMode="dialog"
         android:layout_toStartOf="@+id/worldFullActionButton"
-        android:background="@android:color/darker_gray"
-        android:spinnerMode="dialog" />
+        android:background="@android:color/darker_gray" />
 
     <com.omegasoft.humanity.views.WorldView
         android:id="@+id/worldFullWorld"

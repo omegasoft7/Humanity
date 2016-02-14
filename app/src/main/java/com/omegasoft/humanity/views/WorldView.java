@@ -3,7 +3,6 @@ package com.omegasoft.humanity.views;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.widget.FrameLayout;
 
 import com.omegasoft.humanity.humanity.HumanityAPP;
 import com.omegasoft.humanity.interfaces.AliveObject;
@@ -18,7 +17,7 @@ import rx.schedulers.Schedulers;
 /**
  * Created by farhad on 16.12.2.
  */
-public class WorldView extends FrameLayout {
+public class WorldView extends ZoomableViewGroup {
 
     public WorldView(Context context) {
         super(context);
