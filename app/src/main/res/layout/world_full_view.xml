@@ -3,12 +3,20 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_green_light">
 
+    <Button
+        android:id="@+id/worldFullActionButton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_alignParentEnd="true"
+        android:text="Act" />
+
     <Spinner
         android:id="@+id/worldFullSpinner"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:spinnerMode="dialog"
-        android:background="@android:color/darker_gray" />
+        android:layout_toStartOf="@+id/worldFullActionButton"
+        android:background="@android:color/darker_gray"
+        android:spinnerMode="dialog" />
 
     <com.omegasoft.humanity.views.WorldView
         android:id="@+id/worldFullWorld"

@@ -8,7 +8,6 @@ import android.widget.FrameLayout;
 import com.omegasoft.humanity.humanity.HumanityAPP;
 import com.omegasoft.humanity.interfaces.AliveObject;
 
-import fslogger.lizsoft.lv.fslogger.FSLogger;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -46,12 +45,5 @@ public class AliveObjectView extends View {
         setX(aliveObject.getLocation().getX() * HumanityAPP.zoom);
         setY(aliveObject.getLocation().getY() * HumanityAPP.zoom);
 //        setZ(aliveObject.getLocation().getZ());
-    }
-
-    @Override
-    public boolean performClick() {
-        FSLogger.w(1, "performClick called");
-        //todo this object clicked on word. do something for that
-        return super.performClick();
     }
 }

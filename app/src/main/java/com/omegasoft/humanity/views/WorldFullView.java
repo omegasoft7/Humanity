@@ -11,11 +11,13 @@ import android.widget.Spinner;
 import com.omegasoft.humanity.R;
 import com.omegasoft.humanity.interfaces.AliveObject;
 import com.omegasoft.humanity.interfaces.World;
+import com.omegasoft.humanity.tools.HumanityUtils;
 
 import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.OnItemSelected;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -32,6 +34,7 @@ public class WorldFullView extends FrameLayout {
     WorldView worldView;
 
     private World mWorld;
+    private AliveObject mAliveObject;
 
     public WorldFullView(Context context) {
         super(context);
@@ -81,6 +84,13 @@ public class WorldFullView extends FrameLayout {
 
     @OnItemSelected(R.id.worldFullSpinner)
     void onSpinnerItemSelect(int position) {
+        mAliveObject = mWorld.getObjecstInWorld().get(position);
+    }
 
+    @OnClick(R.id.worldFullActionButton)
+    void onClickActionButton() {
+        if (mAliveObject == null) return;
+
+        HumanityUtils.showDialogWithView(getContext(), mAliveObject);
     }
 }
