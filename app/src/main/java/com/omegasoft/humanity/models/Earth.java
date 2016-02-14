@@ -8,6 +8,6 @@ import com.omegasoft.humanity.interfaces.World;
 public class Earth extends World {
 
     public Earth() {
-        super(350, 150);
+        super(150, 150);
     }
 }

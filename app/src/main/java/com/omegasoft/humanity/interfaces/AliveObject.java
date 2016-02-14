@@ -7,6 +7,7 @@ import com.omegasoft.humanity.models.Location;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import fslogger.lizsoft.lv.fslogger.FSLogger;
 import lombok.Getter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -40,12 +41,15 @@ public abstract class AliveObject {
     private Gene gene;
 
     @Getter
+    private int size;
+
+    @Getter
     private BehaviorSubject<AliveObject> changeSubject = BehaviorSubject.create();
 
     @Getter
     private World world;
 
-    public AliveObject(AliveObject father, AliveObject mother, String name, float maxSpeed) {
+    public AliveObject(AliveObject father, AliveObject mother, String name, float maxSpeed, int size) {
         this.name = name;
 
         this.dateOfBirth = new Date();
@@ -55,6 +59,9 @@ public abstract class AliveObject {
         this.location = mother == null ? new Location() : mother.getLocation();
 
         this.maxMovementSpeed = maxSpeed;
+
+        this.size = size;
+
         getChangeSubject().onNext(this);
     }
 
@@ -82,9 +89,9 @@ public abstract class AliveObject {
         BehaviorSubject<Location> behaviorSubject = BehaviorSubject.create();
 
         //Make sure that destination location is not bigger that world limitations
-        destination.setX(Math.min(destination.getX(), (getWorld().getFinishX() - getWorld().getStartX())));
-        destination.setY(Math.min(destination.getY(), (getWorld().getFinishY() - getWorld().getStartY())));
-        destination.setZ(Math.min(destination.getZ(), (getWorld().getFinishZ() - getWorld().getStartZ())));
+        destination.setX(Math.min(destination.getX(), (getWorld().getFinishX() - getWorld().getStartX() - getSize())));
+        destination.setY(Math.min(destination.getY(), (getWorld().getFinishY() - getWorld().getStartY() - getSize())));
+        destination.setZ(Math.min(destination.getZ(), (getWorld().getFinishZ() - getWorld().getStartZ() - getSize())));
 
         float requestedSpeed = getMaxMovementSpeed() * speedRate;
 
@@ -97,6 +104,7 @@ public abstract class AliveObject {
                     getChangeSubject().onNext(this);
                     return !getLocation().equals(destination);
                 })))
+                .doOnNext(location1 -> FSLogger.w(1, "moving location:" + location1.toString()))
                 .subscribe(behaviorSubject);
 
         return behaviorSubject.asObservable();

@@ -19,16 +19,24 @@ import rx.schedulers.Schedulers;
  * Created by farhad on 16.12.2.
  */
 public class WorldView extends FrameLayout {
+
     public WorldView(Context context) {
         super(context);
+        init();
     }
 
     public WorldView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        init();
     }
 
     public WorldView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        init();
+    }
+
+    private void init() {
+        setBackgroundColor(Color.YELLOW);
     }
 
     public void init(World world) {
@@ -52,7 +60,6 @@ public class WorldView extends FrameLayout {
         for (AliveObject aliveObject : world.getObjecstInWorld()) {
             AliveObjectView aliveObjectView = new AliveObjectView(getContext());
             aliveObjectView.init(aliveObject, Color.RED);
-
             addView(aliveObjectView);
         }
     }

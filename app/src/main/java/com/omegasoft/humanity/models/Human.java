@@ -12,7 +12,7 @@ public class Human extends AliveObject {
 
     //Make a new Human by getting his mother
     public Human(Human father, Human mother, String name) {
-        super(father, mother, name, 3);
+        super(father, mother, name, 3, 4);
     }
 
 }

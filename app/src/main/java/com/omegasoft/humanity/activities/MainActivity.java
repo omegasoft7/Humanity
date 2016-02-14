@@ -8,7 +8,7 @@ import com.omegasoft.humanity.models.Earth;
 import com.omegasoft.humanity.models.Human;
 import com.omegasoft.humanity.models.Location;
 import com.omegasoft.humanity.tools.HumanityUtils;
-import com.omegasoft.humanity.views.WorldView;
+import com.omegasoft.humanity.views.WorldFullView;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -18,7 +18,7 @@ import fslogger.lizsoft.lv.fslogger.FSLogger;
 public class MainActivity extends Activity {
 
     @Bind(R.id.world)
-    WorldView world;
+    WorldFullView world;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -21,13 +21,12 @@
         android:layout_alignParentRight="true"
         android:text="move"/>
 
-    <com.omegasoft.humanity.views.WorldView
+    <com.omegasoft.humanity.views.WorldFullView
         android:id="@+id/world"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
         android:layout_below="@+id/btnTest"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="10dp"
-        android:background="@android:color/darker_gray"/>
+        android:layout_marginTop="10dp"/>
 
 </RelativeLayout>

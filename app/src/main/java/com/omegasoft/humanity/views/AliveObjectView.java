@@ -16,6 +16,7 @@ import rx.schedulers.Schedulers;
  * Created by farhad on 16.12.2.
  */
 public class AliveObjectView extends View {
+
     public AliveObjectView(Context context) {
         super(context);
     }
@@ -29,7 +30,7 @@ public class AliveObjectView extends View {
     }
 
     public void init(AliveObject aliveObject, int color) {
-        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(1 * HumanityAPP.zoom, 1 * HumanityAPP.zoom);
+        FrameLayout.LayoutParams layoutParams = new FrameLayout.LayoutParams(aliveObject.getSize() * HumanityAPP.zoom, aliveObject.getSize() * HumanityAPP.zoom);
         setLayoutParams(layoutParams);
 
         setBackgroundColor(color);
