@@ -182,14 +182,18 @@ public class ZoomableViewGroup extends ViewGroup {
                 mPosX += dx;
                 mPosY += dy;
 
+                FSLogger.w(1, "posX:" + mPosX + " width:" + getWidth() + " scaleFactor:" + mScaleFactor);
                 //todo make limitation that it will not scroll more that height and width of view
-//                mPosX = Math.min(0, mPosX);
+                float _width = getWidth();
+                float _scaledWidth = getWidth() * mScaleFactor;
+                float _maxWidth = (_scaledWidth - _width) / 2;
+                mPosX = Math.max(_maxWidth, mPosX);
+                mPosX = Math.min(-_maxWidth, mPosX);
 //                mPosX = Math.max(-getWidth(), mPosX);
-//                mPosY = Math.min(0, mPosY);
+//                mPosY = Math.max(0, mPosY);
 //                mPosY = Math.min(getHeight(), mPosY);
 
-                FSLogger.w(1, "y:" + y + " dy:" + dy + " posy:" + mPosY);
-                FSLogger.w(1, "x:" + x + " dx:" + dx + " posX:" + mPosX);
+//                FSLogger.w(1, "posy:" + mPosY);
                 mTranslateMatrix.preTranslate(dx, dy);
                 mTranslateMatrix.invert(mTranslateMatrixInverse);
 

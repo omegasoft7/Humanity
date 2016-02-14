@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 
 import com.omegasoft.humanity.humanity.HumanityAPP;
 import com.omegasoft.humanity.interfaces.AliveObject;
+import com.omegasoft.humanity.models.Location;
 
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -39,6 +40,10 @@ public class AliveObjectView extends View {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(this::redraw);
+
+        if (!aliveObject.getLocation().equals(new Location(0, 0, 0))) {
+            aliveObject.moveTo(aliveObject.getLocation(), 1);
+        }
     }
 
     private void redraw(AliveObject aliveObject) {

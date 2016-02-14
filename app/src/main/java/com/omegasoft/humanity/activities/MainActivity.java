@@ -38,8 +38,18 @@ public class MainActivity extends Activity {
     private void firstImplementation() {
         Earth earth = new Earth();
 
-        human1 = new Human(null, null, "Adam");
+        Human human1 = new Human(null, null, "Adam");
+        Human human2 = new Human(null, null, "Adam2");
+        human2.setLocation(new Location(150, 150, 0));
+        Human human3 = new Human(null, null, "Adam3");
+        human3.setLocation(new Location(150, 0, 0));
+        Human human4 = new Human(null, null, "Adam4");
+        human4.setLocation(new Location(0, 150, 0));
+
         earth.attachObjectToWorld(human1);
+        earth.attachObjectToWorld(human2);
+        earth.attachObjectToWorld(human3);
+        earth.attachObjectToWorld(human4);
 
         world.init(earth);
     }
@@ -56,6 +66,5 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btnTest2)
     void onTest2ButtonClick() {
         FSLogger.w(1, "btnTest2 clicked.");
-        human1.moveTo(new Location(1000, 1000, 1000), 1.0f);
     }
 }

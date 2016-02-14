@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import fslogger.lizsoft.lv.fslogger.FSLogger;
 import lombok.Getter;
+import lombok.Setter;
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -33,7 +34,7 @@ public abstract class AliveObject {
     @Getter
     private Date dateOfDie;
 
-    @Getter
+    @Getter @Setter
     private Location location;
 
     //Gene of human
