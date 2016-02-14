@@ -1,5 +1,7 @@
 package com.omegasoft.humanity.models;
 
+import android.graphics.Color;
+
 import com.omegasoft.humanity.interfaces.World;
 
 /**
@@ -8,6 +10,6 @@ import com.omegasoft.humanity.interfaces.World;
 public class Earth extends World {
 
     public Earth() {
-        super(150, 150);
+        super(Color.YELLOW, 150, 150);
     }
 }

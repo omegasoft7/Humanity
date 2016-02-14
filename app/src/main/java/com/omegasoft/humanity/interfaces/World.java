@@ -30,12 +30,16 @@ public abstract class World {
     private float finishZ = 0;
 
     @Getter
+    private int color;
+
+    @Getter
     private ArrayList<AliveObject> objecstInWorld = new ArrayList<>();
 
     private BehaviorSubject<World> changeSubject = BehaviorSubject.create();
 
 
-    public World(float startx, float starty, float startz,float finishx, float finishy, float finishz) {
+    public World(int color, float startx, float starty, float startz,float finishx, float finishy, float finishz) {
+        this.color = color;
         this.startX = startx;
         this.startY = starty;
         this.startZ = startz;
@@ -44,13 +48,13 @@ public abstract class World {
         this.finishZ = finishz;
     }
 
-    public World(float finishx, float finishy, float finishz) {
-        this(0, 0, 0, finishx, finishy, finishz);
+    public World(int color, float finishx, float finishy, float finishz) {
+        this(color, 0, 0, 0, finishx, finishy, finishz);
     }
 
     //2D World
-    public World(float finishx, float finishy) {
-        this(0, 0, 0, finishx, finishy, 0);
+    public World(int color, float finishx, float finishy) {
+        this(color, 0, 0, 0, finishx, finishy, 0);
     }
 
     public boolean attachObjectToWorld(AliveObject aliveObject) {
