@@ -56,6 +56,6 @@ public class MainActivity extends Activity {
     @OnClick(R.id.btnTest2)
     void onTest2ButtonClick() {
         FSLogger.w(1, "btnTest2 clicked.");
-        human1.moveTo(new Location(150, 180, 0), 1.0f).subscribe();
+        human1.moveTo(new Location(150, 180, 0), 1.0f);
     }
 }

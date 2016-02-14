@@ -79,6 +79,8 @@ public abstract class AliveObject {
         if (speedRate > 1 || speedRate < 0)
             throw new IllegalArgumentException("speedRate should be a value between 0-1");
 
+        BehaviorSubject<Location> behaviorSubject = BehaviorSubject.create();
+
         //Make sure that destination location is not bigger that world limitations
         destination.setX(Math.min(destination.getX(), (getWorld().getFinishX() - getWorld().getStartX())));
         destination.setY(Math.min(destination.getY(), (getWorld().getFinishY() - getWorld().getStartY())));
@@ -86,7 +88,7 @@ public abstract class AliveObject {
 
         float requestedSpeed = getMaxMovementSpeed() * speedRate;
 
-        return Observable.just(getLocation())
+        Observable.just(getLocation())
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .delay(HumanityAPP.delayForEachFrame, TimeUnit.MILLISECONDS)
@@ -94,7 +96,10 @@ public abstract class AliveObject {
                     getLocation().move(destination, requestedSpeed);
                     getChangeSubject().onNext(this);
                     return !getLocation().equals(destination);
-                })));
+                })))
+                .subscribe(behaviorSubject);
+
+        return behaviorSubject.asObservable();
     }
 
     public void notifyChange() {
