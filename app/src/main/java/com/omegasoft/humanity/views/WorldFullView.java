@@ -4,21 +4,34 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.FrameLayout;
+import android.widget.Spinner;
 
 import com.omegasoft.humanity.R;
+import com.omegasoft.humanity.interfaces.AliveObject;
 import com.omegasoft.humanity.interfaces.World;
+
+import java.util.concurrent.TimeUnit;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnItemSelected;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by farhad on 2/14/16.
  */
 public class WorldFullView extends FrameLayout {
 
+    @Bind(R.id.worldFullSpinner)
+    Spinner worldFullSpinner;
+
     @Bind(R.id.worldFullWorld)
     WorldView worldView;
+
+    private World mWorld;
 
     public WorldFullView(Context context) {
         super(context);
@@ -45,6 +58,29 @@ public class WorldFullView extends FrameLayout {
     }
 
     public void init(World world) {
-        worldView.init(world);
+        this.mWorld = world;
+
+        worldView.init(mWorld);
+
+        mWorld.change()
+                .debounce(500, TimeUnit.MILLISECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(this::redrawWorld);
+    }
+
+    private void redrawWorld(World world) {
+        this.mWorld = world;
+
+        ArrayAdapter<AliveObject> dataAdapter = new ArrayAdapter<>(getContext(),
+                android.R.layout.simple_spinner_item, mWorld.getObjecstInWorld());
+        dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        worldFullSpinner.setAdapter(dataAdapter);
+    }
+
+
+    @OnItemSelected(R.id.worldFullSpinner)
+    void onSpinnerItemSelect(int position) {
+
     }
 }

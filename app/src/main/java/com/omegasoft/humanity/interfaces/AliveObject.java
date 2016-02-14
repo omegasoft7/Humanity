@@ -117,4 +117,9 @@ public abstract class AliveObject {
     public Observable<AliveObject> change() {
         return changeSubject.asObservable();
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }
